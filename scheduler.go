@@ -51,13 +51,13 @@ func (s *Scheduler) schedule(j job.Job) {
 	defer s.decJobs()
 
 	if j.RunImmediately {
-		j.Runner.Run()
+		j.Run()
 	}
 
 	for {
 		select {
 		case <-ticker.C:
-			j.Runner.Run()
+			j.Run()
 		case <-s.stopChan:
 			return
 		}
@@ -85,9 +85,8 @@ func (s *Scheduler) ScheduledJobs() int {
 	return s.scheduledJobs
 }
 
-// Stop will tell all jobs to stop, will wait for all jobs to complete before they ware stopped
+// Stop will tell all jobs to stop, will wait for all jobs to complete before they are stopped
 func (s *Scheduler) Stop() {
 	close(s.stopChan)
 	s.wg.Wait()
-
 }

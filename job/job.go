@@ -16,7 +16,7 @@ type Runner interface {
 func New(runner Runner, options ...Option) Job {
 
 	job := &Job{
-		Runner:         runner,
+		runner:         runner,
 		Interval:       defaultInterval,
 		RunImmediately: defaultRunImmediately,
 	}
@@ -30,7 +30,11 @@ func New(runner Runner, options ...Option) Job {
 }
 
 type Job struct {
-	Runner         Runner
+	runner Runner
 	RunImmediately bool
 	Interval       time.Duration
+}
+
+func (j Job) Run() {
+	j.runner.Run()
 }

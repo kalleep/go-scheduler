@@ -1,12 +1,10 @@
-// +build unit
-
 package scheduler
 
 import (
 	"testing"
 	"time"
 
-	"sortapp/kit/worker/scheduler/job"
+	"github.com/kalleep/go-scheduler/job"
 )
 
 type TestRunner struct{}
